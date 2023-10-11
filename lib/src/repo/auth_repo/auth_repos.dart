@@ -1,10 +1,11 @@
+// ignore_for_file: unused_import
 import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:safarkar/src/features/authentication/screens/Dashboard.dart';
-import 'package:safarkar/src/features/authentication/screens/welcome/welcome.dart';
-import 'package:safarkar/src/repo/auth_repo/exceptions/signupeandpfailure.dart';
+import 'package:safar_kar/src/features/authentication/screens/Dashboard.dart';
+import 'package:safar_kar/src/features/authentication/screens/welcome/welcome.dart';
+import 'package:safar_kar/src/repo/auth_repo/exceptions/signupeandpfailure.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -28,7 +29,14 @@ class AuthenticationRepository extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: pass);
     } on FirebaseAuthException catch (e) {
-    } catch (_) {}
+      final ex = SignUpEandPFailure.code(e.code);
+      debugPrint("FIREBASE AUTH EXCEPTION - ${ex.msg}");
+      throw ex;
+    } catch (_) {
+      const ex = SignUpEandPFailure();
+      debugPrint("EXCEPTION - ${ex.msg}");
+      throw ex;
+    }
   }
 
   Future<void> loginUserWithEmailAndPassword(String email, String pass) async {
@@ -39,14 +47,14 @@ class AuthenticationRepository extends GetxController {
           : Get.offAll(() => const welcome());
     } on FirebaseAuthException catch (e) {
       final ex = SignUpEandPFailure.code(e.code);
-      print("FIREBASE AUTH EXCEPTION - ${ex.msg}");
+      debugPrint("FIREBASE AUTH EXCEPTION - ${ex.msg}");
       throw ex;
     } catch (_) {
-      final ex = SignUpEandPFailure();
-      print("EXCEPTION - ${ex.msg}");
+      const ex = SignUpEandPFailure();
+      debugPrint("EXCEPTION - ${ex.msg}");
       throw ex;
     }
   }
-
+  
   Future<void> logout() async => await _auth.signOut();
 }

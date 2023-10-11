@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: camel_case_types, non_constant_identifier_names
+
 import 'package:get/get.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
-import 'package:safarkar/src/constants/colors.dart';
-import 'package:safarkar/src/constants/image_string.dart';
-import 'package:safarkar/src/constants/text.dart';
-import 'package:safarkar/src/features/authentication/models/model_onboard.dart';
-import 'package:safarkar/src/features/authentication/screens/onboard/onboardpage.dart';
+import '../../../constants/colors.dart';
+import '../../../constants/image_string.dart';
+import '../../../constants/text.dart';
+import '../models/model_onboard.dart';
+import '../screens/onboard/onboardpage.dart';
 
 class onboardController extends GetxController {
   final controller = LiquidController();
@@ -38,7 +39,7 @@ class onboardController extends GetxController {
     ))
   ];
 
-  void OnPageChangeCallback(int activePageIndex) {
+  Future<void> OnPageChangeCallback(int activePageIndex) async {
     currentPage.value = activePageIndex;
   }
 

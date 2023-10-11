@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 const tPrimaryColor = Color(0xFFFFE400);
@@ -11,7 +9,6 @@ const tWhiteColor = Color(0xffffffff);
 const tDarkColor = Color(0xFF000000);
 
 // OnBoard Colors
-
 const tOnBoard1C = Colors.white;
 const tOnBoard2C = Colors.yellowAccent;
 const tOnBoard3C = Colors.yellow;

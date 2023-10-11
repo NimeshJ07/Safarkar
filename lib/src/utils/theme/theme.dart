@@ -1,13 +1,13 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:safarkar/src/utils/theme/widget_themes/elevatedbuttontheme.dart';
-import 'package:safarkar/src/utils/theme/widget_themes/text_theme.dart';
+import 'package:safar_kar/src/utils/theme/widget_themes/elevatedbuttontheme.dart';
+import 'package:safar_kar/src/utils/theme/widget_themes/text_theme.dart';
 
 class SafarTheme {
   SafarTheme._();
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: MaterialColor(0xFFFFE200, <int, Color>{
+    primarySwatch: const MaterialColor(0xFFFFE200, <int, Color>{
       50: Color(0x1AFFE200),
       100: Color(0x33FFE200),
       200: Color(0x4DFFE200),
@@ -25,7 +25,7 @@ class SafarTheme {
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primarySwatch: MaterialColor(0xFFFFE200, <int, Color>{
+    primarySwatch: const MaterialColor(0xFFFFE200, <int, Color>{
       50: Color(0x1AFFE200),
       100: Color(0x33FFE200),
       200: Color(0x4DFFE200),

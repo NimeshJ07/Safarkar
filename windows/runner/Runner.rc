@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "safarkar" "\0"
+            VALUE "CompanyName", "com.official" "\0"
+            VALUE "FileDescription", "safar_kar" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "safarkar" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "safarkar.exe" "\0"
-            VALUE "ProductName", "safarkar" "\0"
+            VALUE "InternalName", "safar_kar" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.official. All rights reserved." "\0"
+            VALUE "OriginalFilename", "safar_kar.exe" "\0"
+            VALUE "ProductName", "safar_kar" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

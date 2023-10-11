@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 
 class DashBoard extends StatelessWidget {
@@ -12,9 +13,9 @@ class DashBoard extends StatelessWidget {
           color: Colors.black,
         ),
         title:
-            Text("SafarKar", style: Theme.of(context).textTheme.headlineSmall),
+            Text("safar_kar", style: Theme.of(context).textTheme.headlineSmall),
       ),
-      body: Text("SafarKar", style: Theme.of(context).textTheme.headlineSmall),
+      body: Text("safar_kar", style: Theme.of(context).textTheme.headlineSmall),
     );
   }
 }

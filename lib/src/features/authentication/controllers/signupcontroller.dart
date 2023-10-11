@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:safarkar/src/repo/auth_repo/auth_repos.dart';
+import '../../../repo/auth_repo/auth_repos.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();

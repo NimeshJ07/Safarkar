@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:557291980887:android:ff3fdc20b899ce38bd3b12",
+        "mobilesdk_app_id": "1:557291980887:android:4bb3d4ce5ebe27e6bd3b12",
         "android_client_info": {
-          "package_name": "com.example.safarkar"
+          "package_name": "com.official.safar_kar"
         }
       },
       "oauth_client": [],

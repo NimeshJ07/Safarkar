@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:safarkar/src/constants/colors.dart';
-import 'package:safarkar/src/features/authentication/controllers/signupcontroller.dart';
+import 'package:safar_kar/src/constants/colors.dart';
+import 'package:safar_kar/src/features/authentication/controllers/signupcontroller.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -9,65 +9,65 @@ class SignUpForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
-    final _formkey = GlobalKey<FormState>();
+    final formkey = GlobalKey<FormState>();
 
     return Form(
-      key: _formkey,
+      key: formkey,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0),
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
               controller: controller.name,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.person_outline_outlined),
                 labelText: "Name",
                 hintText: "Enter your Full Name",
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
             TextFormField(
               controller: controller.email,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.email),
                 labelText: "Email",
                 hintText: "Enter your Email",
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
             TextFormField(
               controller: controller.phoneno,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.call),
                 labelText: "Phone no",
                 hintText: "Enter your Contact Number",
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
             TextFormField(
               controller: controller.address,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.location_on),
                 labelText: "Address",
                 hintText: "Enter your Address",
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
             Container(
-              padding: EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(15.0),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.grey, // Adjust the color as needed
@@ -79,8 +79,8 @@ class SignUpForm extends StatelessWidget {
               child: GestureDetector(
                 child: Row(
                   children: [
-                    Icon(Icons.calendar_today),
-                    SizedBox(width: 10.0),
+                    const Icon(Icons.calendar_today),
+                    const SizedBox(width: 10.0),
                     Obx(() {
                       // Use GetX's Obx widget to observe the birthDateInString change
                       return Text(
@@ -93,30 +93,30 @@ class SignUpForm extends StatelessWidget {
                     context), // Delegate date selection to the controller
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
             TextFormField(
               controller: controller.pass,
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.fingerprint),
+                prefixIcon: const Icon(Icons.fingerprint),
                 labelText: "Password",
                 hintText: "Enter your Password",
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.remove_red_eye_sharp),
+                  icon: const Icon(Icons.remove_red_eye_sharp),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  if (_formkey.currentState!.validate()) {
+                  if (formkey.currentState!.validate()) {
                     final email = controller.email.text
                         .trim(); // Get the email from the controller
                     final password = controller.pass.text
@@ -125,11 +125,11 @@ class SignUpForm extends StatelessWidget {
                         password); // Pass email and password to the controller
                   }
                 },
-                child: Text("SIGNUP"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: tPrimaryColor,
                   foregroundColor: tDarkColor,
                 ),
+                child: const Text("SIGNUP"),
               ),
             ),
           ],

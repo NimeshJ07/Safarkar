@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safarkar/src/features/authentication/models/model_onboard.dart';
+import 'package:safar_kar/src/features/authentication/models/model_onboard.dart';
 
 class OnBoardPage extends StatelessWidget {
   const OnBoardPage({
@@ -30,7 +30,7 @@ class OnBoardPage extends StatelessWidget {
             ],
           ),
           Text(model.cnt, style: Theme.of(context).textTheme.labelLarge),
-          SizedBox(
+          const SizedBox(
             height: 50.0,
           )
         ],

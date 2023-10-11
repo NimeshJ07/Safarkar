@@ -47,34 +47,34 @@ class DefaultFirebaseOptions {
     apiKey: 'AIzaSyDkP6VweCzMZd97Ml3SqHTX5AppxkXdSH4',
     appId: '1:557291980887:web:06ec892fa7dd51ddbd3b12',
     messagingSenderId: '557291980887',
-    projectId: 'safarkar-46bbb',
-    authDomain: 'safarkar-46bbb.firebaseapp.com',
-    storageBucket: 'safarkar-46bbb.appspot.com',
+    projectId: 'safar_kar-46bbb',
+    authDomain: 'safar_kar-46bbb.firebaseapp.com',
+    storageBucket: 'safar_kar-46bbb.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAKaIdKT9fT1lMAWpViM3UIJFX3y6-8auE',
     appId: '1:557291980887:android:ff3fdc20b899ce38bd3b12',
     messagingSenderId: '557291980887',
-    projectId: 'safarkar-46bbb',
-    storageBucket: 'safarkar-46bbb.appspot.com',
+    projectId: 'safar_kar-46bbb',
+    storageBucket: 'safar_kar-46bbb.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD8vl1LdfGdbJhJkIfZe6PWaYBglGqHWGA',
     appId: '1:557291980887:ios:0bb315d8ed29970bbd3b12',
     messagingSenderId: '557291980887',
-    projectId: 'safarkar-46bbb',
-    storageBucket: 'safarkar-46bbb.appspot.com',
-    iosBundleId: 'com.example.safarkar',
+    projectId: 'safar_kar-46bbb',
+    storageBucket: 'safar_kar-46bbb.appspot.com',
+    iosBundleId: 'com.example.safar_kar',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyD8vl1LdfGdbJhJkIfZe6PWaYBglGqHWGA',
     appId: '1:557291980887:ios:c30f8e4804e79c46bd3b12',
     messagingSenderId: '557291980887',
-    projectId: 'safarkar-46bbb',
-    storageBucket: 'safarkar-46bbb.appspot.com',
-    iosBundleId: 'com.example.safarkar.RunnerTests',
+    projectId: 'safar_kar-46bbb',
+    storageBucket: 'safar_kar-46bbb.appspot.com',
+    iosBundleId: 'com.example.safar_kar.RunnerTests',
   );
 }

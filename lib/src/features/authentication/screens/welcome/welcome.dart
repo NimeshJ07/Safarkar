@@ -1,10 +1,11 @@
+// ignore_for_file: camel_case_types
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:safarkar/src/constants/colors.dart';
-import 'package:safarkar/src/constants/image_string.dart';
-import 'package:safarkar/src/constants/text.dart';
-import 'package:safarkar/src/features/authentication/screens/Login/login.dart';
-import 'package:safarkar/src/features/authentication/screens/SignUp/signup.dart';
+import 'package:safar_kar/src/constants/colors.dart';
+import 'package:safar_kar/src/constants/image_string.dart';
+import 'package:safar_kar/src/constants/text.dart';
+import 'package:safar_kar/src/features/authentication/screens/Login/login.dart';
+import 'package:safar_kar/src/features/authentication/screens/SignUp/signup.dart';
 
 class welcome extends StatelessWidget {
   const welcome({super.key});
@@ -19,12 +20,12 @@ class welcome extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDarkMode ? tSecndaryColor : tPrimaryColor,
       body: Container(
-        padding: EdgeInsets.all(25.0),
+        padding: const EdgeInsets.all(25.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image(
-              image: AssetImage(
+              image: const AssetImage(
                 tWelcome,
               ),
               height: height * 0.6,
@@ -48,18 +49,18 @@ class welcome extends StatelessWidget {
                 Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          Get.to(Login());
+                          Get.to(const Login());
                         },
-                        child: Text("LOGIN"))),
-                SizedBox(
+                        child: const Text("LOGIN"))),
+                const SizedBox(
                   width: 10.0,
                 ),
                 Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          Get.to(SignUp());
+                          Get.to(const SignUp());
                         },
-                        child: Text("SIGNUP")))
+                        child: const Text("SIGNUP")))
               ],
             )
           ],

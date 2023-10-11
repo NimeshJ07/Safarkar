@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:safarkar/firebase_options.dart';
-import 'package:safarkar/src/features/authentication/screens/splashscreen/splashscreen.dart';
-import 'package:safarkar/src/repo/auth_repo/auth_repos.dart';
-import 'package:safarkar/src/utils/theme/theme.dart';
+import 'firebase_options.dart';
+import 'src/features/authentication/screens/splashscreen/splashscreen.dart';
+import 'src/repo/auth_repo/auth_repos.dart';
+import 'src/utils/theme/theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,4 +1,4 @@
-const String tOnBoardTitle1 = "Welcome to SafarKar";
+const String tOnBoardTitle1 = "Welcome to safar_kar";
 const String tOnBoardTitle2 = "Book your Tickets";
 const String tOnBoardTitle3 = "Unique Tickets";
 

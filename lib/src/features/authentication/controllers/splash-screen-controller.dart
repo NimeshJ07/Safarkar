@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: file_names
 import 'package:get/get.dart';
-import 'package:safarkar/src/features/authentication/screens/onboard/onboardscreen.dart';
-import 'package:safarkar/src/features/authentication/screens/welcome/welcome.dart';
+import '../screens/welcome/welcome.dart';
 
 class SplashScreenController extends GetxController {
   static SplashScreenController get find => Get.find();
@@ -9,9 +8,9 @@ class SplashScreenController extends GetxController {
   RxBool animate = false.obs;
 
   Future startAnimation() async {
-    await Future.delayed(Duration(microseconds: 500));
+    await Future.delayed(const Duration(microseconds: 500));
     animate.value = true;
-    await Future.delayed(Duration(milliseconds: 5000));
-    Get.to(welcome());
+    await Future.delayed(const Duration(milliseconds: 5000));
+    Get.to(const welcome());
   }
 }
