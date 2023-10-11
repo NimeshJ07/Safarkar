@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "557291980887",
+    "project_id": "safarkar-46bbb",
+    "storage_bucket": "safarkar-46bbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557291980887:android:ff3fdc20b899ce38bd3b12",
+        "android_client_info": {
+          "package_name": "com.example.safarkar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKaIdKT9fT1lMAWpViM3UIJFX3y6-8auE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
