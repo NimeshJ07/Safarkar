@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,38 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDkP6VweCzMZd97Ml3SqHTX5AppxkXdSH4',
-    appId: '1:557291980887:web:06ec892fa7dd51ddbd3b12',
-    messagingSenderId: '557291980887',
-    projectId: 'safar_kar-46bbb',
-    authDomain: 'safar_kar-46bbb.firebaseapp.com',
-    storageBucket: 'safar_kar-46bbb.appspot.com',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAKaIdKT9fT1lMAWpViM3UIJFX3y6-8auE',
-    appId: '1:557291980887:android:ff3fdc20b899ce38bd3b12',
-    messagingSenderId: '557291980887',
-    projectId: 'safar_kar-46bbb',
-    storageBucket: 'safar_kar-46bbb.appspot.com',
+    apiKey: 'AIzaSyDUjdNSqJ8BJapmqpSYQVhc1Xe2KOvXUD0',
+    appId: '1:597613136003:android:380b0c02d2dd78ce05f3b6',
+    messagingSenderId: '597613136003',
+    projectId: 'safarkar-7e056',
+    storageBucket: 'safarkar-7e056.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD8vl1LdfGdbJhJkIfZe6PWaYBglGqHWGA',
-    appId: '1:557291980887:ios:0bb315d8ed29970bbd3b12',
-    messagingSenderId: '557291980887',
-    projectId: 'safar_kar-46bbb',
-    storageBucket: 'safar_kar-46bbb.appspot.com',
-    iosBundleId: 'com.example.safar_kar',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyD8vl1LdfGdbJhJkIfZe6PWaYBglGqHWGA',
-    appId: '1:557291980887:ios:c30f8e4804e79c46bd3b12',
-    messagingSenderId: '557291980887',
-    projectId: 'safar_kar-46bbb',
-    storageBucket: 'safar_kar-46bbb.appspot.com',
-    iosBundleId: 'com.example.safar_kar.RunnerTests',
+    apiKey: 'AIzaSyCtGxloh9cWhXWaRJPCtg5NGSt10TnEsjM',
+    appId: '1:597613136003:ios:257e5138e52156cb05f3b6',
+    messagingSenderId: '597613136003',
+    projectId: 'safarkar-7e056',
+    storageBucket: 'safarkar-7e056.appspot.com',
+    iosBundleId: 'com.official.safarKar',
   );
 }

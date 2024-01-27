@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "557291980887",
-    "project_id": "safarkar-46bbb",
-    "storage_bucket": "safarkar-46bbb.appspot.com"
+    "project_number": "597613136003",
+    "project_id": "safarkar-7e056",
+    "storage_bucket": "safarkar-7e056.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:557291980887:android:4bb3d4ce5ebe27e6bd3b12",
+        "mobilesdk_app_id": "1:597613136003:android:380b0c02d2dd78ce05f3b6",
         "android_client_info": {
           "package_name": "com.official.safar_kar"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAKaIdKT9fT1lMAWpViM3UIJFX3y6-8auE"
+          "current_key": "AIzaSyDUjdNSqJ8BJapmqpSYQVhc1Xe2KOvXUD0"
         }
       ],
       "services": {

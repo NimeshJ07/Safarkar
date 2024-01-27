@@ -3,14 +3,19 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/constants/image_string.dart';
 import 'package:safar_kar/src/constants/text.dart';
+import 'package:safar_kar/src/features/authentication/controllers/otpcontroller.dart';
+import 'package:get/get.dart';
 
 class ForgotPassOtp extends StatelessWidget {
   const ForgotPassOtp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var otp;
+    var otpcontroller = Get.put(OtpController());
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Align(
           alignment: Alignment.center,
           child: Container(
@@ -52,6 +57,10 @@ class ForgotPassOtp extends StatelessWidget {
                   numberOfFields: 6,
                   fillColor: Colors.black.withOpacity(0.1),
                   filled: true,
+                  onSubmit: (code) {
+                    otp = code;
+                    OtpController.instance.verifyOtp(otp);
+                  },
                 ),
                 const SizedBox(
                   height: 20.0,
@@ -59,7 +68,9 @@ class ForgotPassOtp extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      OtpController.instance.verifyOtp(otp);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: tPrimaryColor,
                       foregroundColor: tDarkColor,

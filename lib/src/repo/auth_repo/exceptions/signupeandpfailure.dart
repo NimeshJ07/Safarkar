@@ -22,4 +22,8 @@ class SignUpEandPFailure {
         return const SignUpEandPFailure();
     }
   }
+
+  factory SignUpEandPFailure.custom(String message) {
+    return SignUpEandPFailure(message);
+  }
 }

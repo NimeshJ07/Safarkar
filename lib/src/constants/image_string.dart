@@ -11,3 +11,4 @@ const String tGoogle = "assets/images/logo/google.png";
 const String tLogin = "assets/images/logo/rail.png";
 const String tFp = "assets/images/logo/forgot-password.png";
 const String tOtp = "assets/images/logo/otp.png";
+const String tProfile = "assets/images/logo/user.png";

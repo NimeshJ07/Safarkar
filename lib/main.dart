@@ -1,15 +1,22 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:safar_kar/src/repo/user_repo/user_repo.dart';
 import 'firebase_options.dart';
 import 'src/features/authentication/screens/splashscreen/splashscreen.dart';
+import 'src/features/authentication/screens/Dashboard.dart';
 import 'src/repo/auth_repo/auth_repos.dart';
 import 'src/utils/theme/theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => Get.put(AuthenticationRepository()));
+      .then((value) {
+    Get.put(AuthenticationRepository());
+    // Get.put(UserRepository()); // Register UserRepository
+  }).catchError((error) {
+    debugPrint("Firebase initialization error: $error");
+  });
   runApp(const MyApp());
 }
 

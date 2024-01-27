@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/constants/text.dart';
+import 'package:safar_kar/src/features/authentication/controllers/logincontroller.dart';
+import 'package:safar_kar/src/features/authentication/screens/Dashboard.dart';
 import 'package:safar_kar/src/features/authentication/screens/forgotpass/forgotpassmail.dart';
 
 class LoginForm extends StatelessWidget {
@@ -10,13 +12,18 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
+    final formkey = GlobalKey<FormState>();
+
     return Form(
+      key: formkey,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
+              controller: controller.email,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.person_outline_outlined),
                 labelText: "Email",
@@ -28,6 +35,7 @@ class LoginForm extends StatelessWidget {
               height: 15.0,
             ),
             TextFormField(
+              controller: controller.pass,
               decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.fingerprint),
                   labelText: "Password",
@@ -162,7 +170,13 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (formkey.currentState!.validate()) {
+                    LoginController.instance.loginUser(
+                        controller.email.text.trim(),
+                        controller.pass.text.trim());
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: tPrimaryColor,
                   foregroundColor: tDarkColor,

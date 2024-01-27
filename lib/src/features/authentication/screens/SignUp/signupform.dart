@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/features/authentication/controllers/signupcontroller.dart';
+import 'package:safar_kar/src/features/authentication/models/user_model.dart';
+import 'package:safar_kar/src/features/authentication/screens/Login/login.dart';
+import 'package:safar_kar/src/features/authentication/screens/forgotpass/forgotpassotp.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -116,14 +119,25 @@ class SignUpForm extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  if (formkey.currentState!.validate()) {
-                    final email = controller.email.text
-                        .trim(); // Get the email from the controller
-                    final password = controller.pass.text
-                        .trim(); // Get the password from the controller
-                    controller.registerUser(email,
-                        password); // Pass email and password to the controller
-                  }
+                  // Get the password from the controller
+                  // SignUpController.instance.registerUser(
+                  //     controller.email.text.trim(),
+                  //     controller.pass.text.trim());
+                  // SignUpController.instance
+                  //     .phoneAuthenticate(controller.phoneno.text.trim());
+                  // Get.to(
+                  //     const Login()); // Pass email and password to the controller
+
+                  final user = UserModel(
+                    fullname: controller.name.text.trim(),
+                    email: controller.email.text.trim(),
+                    phoneno: controller.phoneno.text.trim(),
+                    address: controller.address.text.trim(),
+                    dob: controller.birthDateInString.value,
+                    pass: controller.pass.text.trim(),
+                  );
+
+                  SignUpController.instance.CreateUser(user);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: tPrimaryColor,
