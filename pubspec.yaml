@@ -13,12 +13,12 @@ dependencies:
     sdk: flutter
 
   # utilities
-  get:
+  get: ^4.3.8
   liquid_swipe:
 
   # firebase
   firebase_core: ^2.17.0
-  firebase_auth: ^4.10.1
+  firebase_auth: ^4.5.0
   cloud_firestore: 
 
   # UI
@@ -28,6 +28,8 @@ dependencies:
   google_fonts:
   flutter_native_splash:
   line_awesome_flutter:
+  bottom_navy_bar: 6.0.0
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:

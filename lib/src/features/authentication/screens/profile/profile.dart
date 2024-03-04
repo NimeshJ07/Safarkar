@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/constants/image_string.dart';
+import 'package:safar_kar/src/features/authentication/controllers/logincontroller.dart';
 import 'package:safar_kar/src/features/authentication/screens/Login/login.dart';
 import 'package:safar_kar/src/features/authentication/screens/profile/updateProfile.dart';
 import 'package:safar_kar/src/repo/auth_repo/auth_repos.dart';
@@ -12,6 +13,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     var isIconColor = isDark ? tPrimaryColor : tAccentColor;
     return Scaffold(
@@ -172,7 +174,7 @@ class Profile extends StatelessWidget {
 
               ListTile(
                 onTap: () {
-                  Get.to(Login());
+                  controller.logoutUser();
                 },
                 leading: Container(
                   width: 30,

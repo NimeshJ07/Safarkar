@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safar_kar/src/features/authentication/screens/Dashboard.dart';
@@ -13,23 +14,26 @@ class AuthenticationRepository extends GetxController {
   var verificationId = ''.obs;
 
   @override
-  void onReady() {
-    firebaseUser = Rx<User?>(_auth.currentUser);
-    firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, (callback) => _setInitialScreen);
-  }
-
-  @override
   void onInit() {
     super.onInit();
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
   }
 
-  _setInitialScreen(User? user) {
+  @override
+  void onReady() {
+    ever(firebaseUser, _setInitialScreen);
+    super.onReady();
+  }
+
+  void setInitialScreen(User? user) {
+    _setInitialScreen(user);
+  }
+
+  void _setInitialScreen(User? user) {
     user == null
         ? Get.offAll(() => const welcome())
-        : Get.offAll(() => const DashBoard());
+        : Get.offAll(() => Dashboard());
   }
 
   //phone auth
@@ -82,7 +86,7 @@ class AuthenticationRepository extends GetxController {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: pass);
       firebaseUser.value != null
-          ? Get.to(() => const DashBoard())
+          ? Get.to(() => Dashboard())
           : Get.to(() => const welcome());
     } on FirebaseAuthException catch (e) {
       final ex = SignUpEandPFailure.code(e.code);
@@ -98,5 +102,56 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  Future<void> logout() async => await _auth.signOut();
+  Future<void> sendEmailVerification() async {
+    try {
+      await _auth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      final ex = SignUpEandPFailure.code(e.code);
+      debugPrint("FIREBASE AUTH EXCEPTION - ${ex.msg}");
+      throw ex;
+    } catch (_) {
+      const ex = SignUpEandPFailure();
+      debugPrint("EXCEPTION - ${ex.msg}");
+      throw ex;
+    }
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      final ex = e.message ?? "An error occurred during Google sign-in";
+      print(ex);
+    } on FirebaseAuthException catch (e) {
+      final ex = e.message ?? "An unexpected error occurred";
+      print(ex);
+    } catch (_) {
+      const ex = "An unexpected error occurred";
+      print(ex);
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      await GoogleSignIn().signOut();
+      await FirebaseAuth.instance.signOut();
+      firebaseUser.value = null;
+      Get.offAll(() => const welcome());
+    } on FirebaseAuthException catch (e) {
+      final ex = SignUpEandPFailure.code(e.code);
+      debugPrint("FIREBASE AUTH EXCEPTION - ${ex.msg}");
+      throw ex;
+    } catch (_) {
+      const ex = SignUpEandPFailure();
+      debugPrint("EXCEPTION - ${ex.msg}");
+      throw ex;
+    }
+  }
 }

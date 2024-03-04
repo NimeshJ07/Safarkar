@@ -30,16 +30,21 @@ class UserModel {
     };
   }
 
+  factory UserModel.fromJson(Map<String, dynamic> json, String id) {
+    return UserModel(
+      id: id,
+      fullname: json["Full-Name"] ?? '',
+      email: json["E-Mail"] ?? '',
+      phoneno: json["Phone-no"] ?? '',
+      address: json["Address"] ?? '',
+      dob: json["D.O.B"] ?? '',
+      pass: json["Password"] ?? '',
+    );
+  }
+
   factory UserModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
-    return UserModel(
-        id: document.id,
-        fullname: data["Full-Name"],
-        email: data["E-Mail"],
-        phoneno: data["Phone-no"],
-        address: data["Address"],
-        dob: data["D.O.B"],
-        pass: data["Password"]);
+    return UserModel.fromJson(data, document.id);
   }
 }

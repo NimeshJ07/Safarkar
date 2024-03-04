@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/features/authentication/controllers/onboardcontroller.dart';
+import 'package:safar_kar/src/features/authentication/screens/splashscreen/splashscreen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardScreen extends StatelessWidget {
@@ -27,7 +28,8 @@ class OnBoardScreen extends StatelessWidget {
               child: OutlinedButton(
                 onPressed: () => obcontroller.animateNext(),
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white, side: const BorderSide(color: Colors.black87),
+                  foregroundColor: Colors.white,
+                  side: const BorderSide(color: Colors.black87),
                   shape: const CircleBorder(),
                   padding: const EdgeInsets.all(20.0),
                 ),
@@ -43,7 +45,10 @@ class OnBoardScreen extends StatelessWidget {
             right: 20,
             child: TextButton(
               onPressed: () {
-                obcontroller.skip();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SplashScreen()),
+                );
               },
               child: const Text(
                 "Skip",

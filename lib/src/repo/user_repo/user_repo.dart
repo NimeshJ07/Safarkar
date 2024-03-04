@@ -40,4 +40,68 @@ class UserRepository extends GetxController {
         snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
     return userData;
   }
+
+  Future<void> updateUserDOB(String email, String newDOB) async {
+    try {
+      final userQuery =
+          await db.collection("Users").where("E-Mail", isEqualTo: email).get();
+
+      if (userQuery.docs.isNotEmpty) {
+        final userId = userQuery.docs.first.id;
+
+        await db
+            .collection("Users")
+            .doc(userId)
+            .update({"D.O.B": newDOB}).then((value) {
+          Get.snackbar("Success", "Date of Birth updated successfully",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green.withOpacity(0.1),
+              colorText: Colors.green);
+        }).catchError((error) {
+          Get.snackbar("Error", "Failed to update Date of Birth",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.redAccent.withOpacity(0.1),
+              colorText: Colors.red);
+        });
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<void> updateUserProfile(
+    String email, {
+    required String name,
+    required String phoneNumber,
+    required String address,
+    required String password,
+  }) async {
+    try {
+      final userQuery =
+          await db.collection("Users").where("E-Mail", isEqualTo: email).get();
+
+      if (userQuery.docs.isNotEmpty) {
+        final userId = userQuery.docs.first.id;
+
+        await db.collection("Users").doc(userId).update({
+          "Full-Name": name,
+          "Phone-no": phoneNumber,
+          "Address": address,
+          "Password": password,
+        }).then((value) {
+          Get.snackbar("Success", "Profile updated successfully",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green.withOpacity(0.1),
+              colorText: Colors.green);
+        }).catchError((error) {
+          Get.snackbar("Error", "Failed to update profile",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.redAccent.withOpacity(0.1),
+              colorText: Colors.red);
+        });
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/constants/image_string.dart';
 import 'package:safar_kar/src/constants/text.dart';
+import 'package:safar_kar/src/features/authentication/controllers/logincontroller.dart';
 import 'package:safar_kar/src/features/authentication/screens/Login/LoginForm.dart';
 import 'package:safar_kar/src/features/authentication/screens/SignUp/signup.dart';
 
@@ -11,7 +12,11 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     final size = MediaQuery.of(context).size;
+    final isLoading = controller
+        .isGoogleLoading.value; // Fix: Access isLoading from the controller
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -52,7 +57,11 @@ class Login extends StatelessWidget {
                           image: AssetImage(tGoogle),
                           width: 20.0,
                         ),
-                        onPressed: () {},
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                                controller.googleSignIn();
+                              },
                         label: const Text("Sign-in with Google"),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: tDarkColor,
