@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safar_kar/src/features/authentication/screens/Payment/payment.dart';
+import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/penality.dart';
 import 'package:safar_kar/src/features/authentication/screens/onboard/onboardscreen.dart';
 import 'package:safar_kar/src/repo/user_repo/user_repo.dart';
 import 'firebase_options.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
-      home: const OnBoardScreen(),
+      home: OnBoardScreen(),
     );
   }
 }

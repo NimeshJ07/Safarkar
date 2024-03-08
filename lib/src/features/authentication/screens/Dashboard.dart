@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/constants/image_string.dart';
 import 'package:safar_kar/src/features/authentication/screens/Payment/payment.dart';
+import 'package:safar_kar/src/features/authentication/screens/StudentCon.dart';
+import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/map.dart';
+import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/penality.dart';
 import 'Dashboard/layer2.dart';
 import 'package:safar_kar/src/features/authentication/screens/profile/profile.dart';
 
@@ -36,6 +39,7 @@ class _DashboardState extends State<Dashboard> {
   TextEditingController sourceController = TextEditingController();
   TextEditingController numberOfTicketsController = TextEditingController();
   TextEditingController destinationController = TextEditingController();
+  TextEditingController ticketNumberController = TextEditingController();
 
   int _selectedIndex = 0;
   static List<Widget> _screens = [Dashboard(), StudentScreen(), Profile()];
@@ -58,6 +62,15 @@ class _DashboardState extends State<Dashboard> {
       default:
     }
   }
+
+  @override
+  void initState() {
+    super.initState();
+    selectedImage = tBooking; // Set the default selected image to 'tBooking'
+    showBookingDetails = true;
+  }
+
+  String? groupValue = 'issue';
 
   @override
   Widget build(BuildContext context) {
@@ -91,362 +104,564 @@ class _DashboardState extends State<Dashboard> {
       ),
 
       body: Container(
-        color: Color.fromARGB(255, 235, 241, 247),
         child: ListView(
           children: [
             //Layer 2
             Container(
-              height: 100,
+              height: 150, // Adjust the height as needed
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  buildCircularImage(tBooking, 'Booking'),
-                  buildCircularImage(tPlatformTicket, 'Platform Ticket'),
-                  buildCircularImage(tSeasonalBooking, 'Seasonal Booking'),
-                  buildCircularImage(tBookingHistory, 'Booking History'),
+                  buildCircularImage(tBooking, 'Booking', 'Booking'),
+                  buildCircularImage(
+                      tPlatformTicket, 'Platform Ticket', 'Platform Ticket'),
+                  buildCircularImage(
+                      tSeasonalBooking, 'Seasonal Booking', 'Seasonal Booking'),
+                  buildCircularImage(
+                      tBookingHistory, 'Booking History', 'Booking History'),
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            Divider(height: 1, color: Color.fromRGBO(203, 199, 199, 1)),
+
+            const Divider(height: 1, color: Color.fromRGBO(203, 199, 199, 1)),
+
             if (selectedImage.isNotEmpty)
-              Column(
-                children: [
-                  if (showBookingDetails)
-                    Column(
-                      children: [
-                        SizedBox(height: 10.0),
-                        Text(
-                          "Ticket Booking",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Radio(
-                              value: 'Individual',
-                              groupValue: platformTicketType,
-                              onChanged: (value) {
-                                setState(() {
-                                  platformTicketType = "Individual";
-                                });
-                              },
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    if (showBookingDetails)
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
                             ),
-                            Text('Individual'),
-                            Radio(
-                              value: 'Multiple',
-                              groupValue: platformTicketType,
-                              onChanged: (value) {
-                                setState(() {
-                                  platformTicketType = "Multiple";
-                                });
-                              },
-                            ),
-                            Text('Multiple'),
                           ],
                         ),
-                        Column(
+                        child: Column(
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 20.0,
-                                  right:
-                                      20.0), // Adjust the left margin as needed
-                              child: Row(
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.yellow,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0),
+                                ),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10.0,
+                                horizontal: 10.0,
+                              ),
+                              child: const Row(
                                 children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        prefixIcon: Icon(Icons.train_outlined),
-                                        labelText: "Source",
-                                        hintText: "Enter your Source Station",
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                      width:
-                                          8.0), // Add some spacing between the text fields and -->
-                                  Text("-->", style: TextStyle(fontSize: 20.0)),
-                                  SizedBox(width: 8.0), // Add some more spacing
-                                  Expanded(
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        prefixIcon: Icon(Icons.train_outlined),
-                                        labelText: "Destination",
-                                        hintText:
-                                            "Enter your Destination Station",
-                                        border: OutlineInputBorder(),
-                                      ),
+                                  Text(
+                                    "Ticket Booking",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 20.0),
-                        SizedBox(
-                          width: 200.0,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Get.to(Payment());
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: tPrimaryColor,
-                              foregroundColor: tDarkColor,
-                            ),
-                            child: const Text("Book Now"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  if (showPlatformTicketDetails)
-                    Column(
-                      children: [
-                        SizedBox(height: 10.0),
-                        Text(
-                          "Platform Booking",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 5.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Radio(
-                              value: 'Individual',
-                              groupValue: platformTicketType,
-                              onChanged: (value) {
-                                setState(() {
-                                  platformTicketType = "Individual";
-                                });
-                              },
-                            ),
-                            Text('Individual'),
-                            Radio(
-                              value: 'Multiple',
-                              groupValue: platformTicketType,
-                              onChanged: (value) {
-                                setState(() {
-                                  platformTicketType = "Multiple";
-                                });
-                              },
-                            ),
-                            Text('Multiple'),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                decoration: const InputDecoration(
-                                  prefixIcon: Icon(Icons.train_outlined),
-                                  labelText: "Source",
-                                  hintText: "Enter your Source Station",
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              TextFormField(
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  prefixIcon: Icon(Icons.person_2_outlined),
-                                  labelText: "Person",
-                                  hintText: "Enter a Number of Person",
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        SizedBox(
-                          width: 200.0,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: tPrimaryColor,
-                              foregroundColor: tDarkColor,
-                            ),
-                            child: const Text("Book Ticket"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  if (showSeasonalBookingDetails)
-                    Column(
-                      children: [
-                        SizedBox(height: 10.0),
-                        Text(
-                          "Seasonal Booking",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 20.0),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 20.0,
-                                  right:
-                                      20.0), // Adjust the left margin as needed
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        prefixIcon: Icon(Icons.train_outlined),
-                                        labelText: "Source",
-                                        hintText: "Enter your Source Station",
-                                        border: OutlineInputBorder(),
-                                      ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Radio(
+                                      value: 'Individual',
+                                      groupValue: platformTicketType,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          platformTicketType = "Individual";
+                                        });
+                                      },
                                     ),
-                                  ),
-                                  SizedBox(
-                                      width:
-                                          8.0), // Add some spacing between the text fields and -->
-                                  Text("-->", style: TextStyle(fontSize: 20.0)),
-                                  SizedBox(width: 8.0), // Add some more spacing
-                                  Expanded(
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        prefixIcon: Icon(Icons.train_outlined),
-                                        labelText: "Destination",
-                                        hintText:
-                                            "Enter your Destination Station",
-                                        border: OutlineInputBorder(),
+                                    Text('Individual'),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Radio(
+                                      value: 'Multiple',
+                                      groupValue: platformTicketType,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          platformTicketType = "Multiple";
+                                        });
+                                      },
+                                    ),
+                                    Text('Multiple (Include with you)'),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextFormField(
+                                          decoration: const InputDecoration(
+                                            prefixIcon:
+                                                Icon(Icons.train_outlined),
+                                            labelText: "Source",
+                                            hintText:
+                                                "Enter your Source Station",
+                                            border: OutlineInputBorder(),
+                                          ),
+                                        ),
                                       ),
+                                      SizedBox(
+                                        width: 8.0,
+                                      ),
+                                      Text("-->",
+                                          style: TextStyle(fontSize: 20.0)),
+                                      SizedBox(
+                                        width: 8.0,
+                                      ),
+                                      Expanded(
+                                        child: TextFormField(
+                                          decoration: const InputDecoration(
+                                            prefixIcon:
+                                                Icon(Icons.train_outlined),
+                                            labelText: "Destination",
+                                            hintText:
+                                                "Enter your Destination Station",
+                                            border: OutlineInputBorder(),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 10.0),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  20.0), // Adjust the radius as needed
+                              child: SizedBox(
+                                width: 200.0,
+                                child: TextButton(
+                                  onPressed: () {
+                                    Get.to(Payment());
+                                  },
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: tPrimaryColor,
+                                    primary: tDarkColor,
+                                  ),
+                                  child: Text("Book Now"),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10.0),
+                          ],
+                        ),
+                      ),
+                    if (showPlatformTicketDetails)
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.yellow,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0),
+                                ),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10.0,
+                                horizontal: 10.0,
+                              ),
+                              child: const Row(
+                                children: [
+                                  Text(
+                                    "Platform Ticket",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 20.0),
-                        SizedBox(
-                          width: 200.0,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: tPrimaryColor,
-                              foregroundColor: tDarkColor,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Radio(
+                                  value: 'Individual',
+                                  groupValue: platformTicketType,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      platformTicketType = "Individual";
+                                    });
+                                  },
+                                ),
+                                Text('Individual'),
+                                Radio(
+                                  value: 'Multiple',
+                                  groupValue: platformTicketType,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      platformTicketType = "Multiple";
+                                    });
+                                  },
+                                ),
+                                Text('Multiple (Include with you)'),
+                              ],
                             ),
-                            child: const Text("Book Now"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  if (showBookingHistoryDetails)
-                    Column(
-                      children: [
-                        SizedBox(height: 10.0),
-                        Text(
-                          "Booking History",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 5.0),
-                        Container(
-                          width: 320,
-                          height: 180,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 4,
-                                color: Color(0x33000000),
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Stack(
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Column(
                                 children: [
                                   Container(
-                                    color: Color(0xFFFFE400),
+                                    height: 50.0,
+                                    child: TextFormField(
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.train_outlined),
+                                        // labelText: "Source",
+                                        hintText: "Enter your Source Station",
+                                        border: OutlineInputBorder(),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical:
+                                                12.0), // Adjust the vertical padding as needed
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Container(
+                                    height: 50.0,
+                                    child: TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      decoration: const InputDecoration(
+                                          prefixIcon:
+                                              Icon(Icons.person_2_outlined),
+                                          // labelText: "Person",
+                                          hintText: "Enter a Number of Person",
+                                          border: OutlineInputBorder(),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 12.0)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 10.0),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  20.0), // Adjust the radius as needed
+                              child: SizedBox(
+                                width: 200.0,
+                                child: TextButton(
+                                  onPressed: () {
+                                    Get.to(Payment());
+                                  },
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: tPrimaryColor,
+                                    primary: tDarkColor,
+                                  ),
+                                  child: Text("Book Ticket"),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10.0),
+                          ],
+                        ),
+                      ),
+                    if (showSeasonalBookingDetails)
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.yellow,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0),
+                                ),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10.0,
+                                horizontal: 10.0,
+                              ),
+                              child: const Row(
+                                children: [
+                                  Text(
+                                    "Seasonal Booking",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 15.0),
+                                  child: Container(
                                     child: Row(
-                                      mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Flexible(
-                                          child: Text(
-                                            'Booked Ticket',
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                              fontFamily: 'Readex Pro',
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Radio(
+                                                  value: 'issue',
+                                                  groupValue: groupValue,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      groupValue =
+                                                          value as String?;
+                                                    });
+                                                  },
+                                                ),
+                                                Text('Issue Ticket'),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Radio(
+                                                  value: 'renew',
+                                                  groupValue: groupValue,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      groupValue =
+                                                          value as String?;
+                                                    });
+                                                  },
+                                                ),
+                                                Text('Renew Ticket'),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                if (groupValue ==
+                                    'issue') // Conditionally show based on selection
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: TextFormField(
+                                            controller: sourceController,
+                                            decoration: const InputDecoration(
+                                              prefixIcon:
+                                                  Icon(Icons.train_outlined),
+                                              labelText: "Source",
+                                              hintText:
+                                                  "Enter your Source Station",
+                                              border: OutlineInputBorder(),
                                             ),
                                           ),
                                         ),
-                                        VerticalDivider(
-                                          thickness: 1,
-                                          color: Colors.grey[300],
-                                        ),
-                                        Text(
-                                          'Fare : \$20',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
+                                        SizedBox(width: 8.0),
+                                        Text("-->",
+                                            style: TextStyle(fontSize: 20.0)),
+                                        SizedBox(width: 8.0),
+                                        Expanded(
+                                          child: TextFormField(
+                                            controller: destinationController,
+                                            decoration: const InputDecoration(
+                                              prefixIcon:
+                                                  Icon(Icons.train_outlined),
+                                              labelText: "Destination",
+                                              hintText:
+                                                  "Enter your Destination Station",
+                                              border: OutlineInputBorder(),
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        'Source ',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: VerticalDivider(
-                                          thickness: 1,
-                                          color: Colors.grey[300],
-                                        ),
-                                      ),
-                                      Text(
-                                        'Destination',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Expanded(
+                                if (groupValue ==
+                                    'renew') // Conditionally show based on selection
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
                                     child: Row(
                                       children: [
-                                        Padding(
-                                            padding:
-                                                EdgeInsets.only(left: 20.0)),
+                                        Expanded(
+                                          child: TextFormField(
+                                            controller: ticketNumberController,
+                                            decoration: const InputDecoration(
+                                              prefixIcon:
+                                                  Icon(Icons.train_outlined),
+                                              labelText: "Ticket Number",
+                                              hintText:
+                                                  "Enter Prevoius Ticket Number",
+                                              border: OutlineInputBorder(),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            SizedBox(height: 10.0),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: SizedBox(
+                                width: 200.0,
+                                child: TextButton(
+                                  onPressed: () {
+                                    if (groupValue == 'renew') {
+                                      if (ticketNumberController.text != null) {
+                                        Get.to(StudentScreen(), arguments: {
+                                          'ticketNumber':
+                                              ticketNumberController.text,
+                                        });
+                                      }
+                                    } else if (groupValue == 'issue') {
+                                      if (sourceController.text != null &&
+                                          destinationController.text != null) {
+                                        Get.to(StudentScreen(), arguments: {
+                                          'source': sourceController.text,
+                                          'destination':
+                                              destinationController.text,
+                                        });
+                                      }
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: tPrimaryColor,
+                                    primary: tDarkColor,
+                                  ),
+                                  child: Text("Book Now"),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10.0),
+                          ],
+                        ),
+                      ),
+                    if (showBookingHistoryDetails)
+                      Column(
+                        children: [
+                          Container(
+                            width: 320,
+                            height: 180,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x33000000),
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Stack(
+                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      color: Color(0xFFFFE400),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Flexible(
+                                            child: Text(
+                                              'Booked Ticket',
+                                              textAlign: TextAlign.justify,
+                                              style: TextStyle(
+                                                fontFamily: 'Readex Pro',
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          VerticalDivider(
+                                            thickness: 1,
+                                            color: Colors.grey[300],
+                                          ),
+                                          Text(
+                                            'Fare : \$20',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
                                         Text(
-                                          'Via : CLA',
+                                          'Source ',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                          child: VerticalDivider(
+                                            thickness: 1,
+                                            color: Colors.grey[300],
+                                          ),
+                                        ),
+                                        Text(
+                                          'Destination',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.normal,
@@ -454,168 +669,184 @@ class _DashboardState extends State<Dashboard> {
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Adult : 1',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: VerticalDivider(
-                                          thickness: 1,
-                                          color: Colors.grey[300],
-                                        ),
-                                      ),
-                                      Text(
-                                        'SECOND (||)',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: VerticalDivider(
-                                          thickness: 1,
-                                          color: Colors.grey[300],
-                                        ),
-                                      ),
-                                      Text(
-                                        'ORDINARY',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        'Booking Date : 28/02/2024',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: VerticalDivider(
-                                          thickness: 1,
-                                          color: Colors.grey[300],
-                                        ),
-                                      ),
-                                      Text(
-                                        'MTM : 202020222',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Center(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color.fromARGB(255, 1, 222, 82)
-                                        .withOpacity(0.1),
-                                  ),
-                                  padding: EdgeInsets.all(50),
-                                  child: Transform.rotate(
-                                    angle: -20 * 3.141592653589793 / 180,
-                                    child: Text(
-                                      'BOOKED',
-                                      style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 158, 158, 157),
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 20.0)),
+                                          Text(
+                                            'Via : CLA',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Adult : 1',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                          child: VerticalDivider(
+                                            thickness: 1,
+                                            color: Colors.grey[300],
+                                          ),
+                                        ),
+                                        Text(
+                                          'SECOND (||)',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                          child: VerticalDivider(
+                                            thickness: 1,
+                                            color: Colors.grey[300],
+                                          ),
+                                        ),
+                                        Text(
+                                          'ORDINARY',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          'Booking Date : 28/02/2024',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                          child: VerticalDivider(
+                                            thickness: 1,
+                                            color: Colors.grey[300],
+                                          ),
+                                        ),
+                                        Text(
+                                          'MTM : 202020222',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        GestureDetector(
-                          onTap: () {
-                            // Handle more button click for booking history
-                            // You can add logic here to navigate to a new page displaying all tickets
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AllTicketsScreen(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              // Customize the container's appearance as needed
-                              color:
-                                  Color(0xFFFFE400), // Example background color
-                              borderRadius: BorderRadius.circular(
-                                  8), // Example border radius
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                // Icon(
-                                //   Icons.more_horiz,
-                                //   color: Colors.white, // Example icon color
-                                // ),
-                                Text(
-                                  'View All',
-                                  style: TextStyle(
-                                    color: Colors.black, // Example text color
+                                Center(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Color.fromARGB(255, 1, 222, 82)
+                                          .withOpacity(0.1),
+                                    ),
+                                    padding: EdgeInsets.all(50),
+                                    child: Transform.rotate(
+                                      angle: -20 * 3.141592653589793 / 180,
+                                      child: Text(
+                                        'BOOKED',
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 158, 158, 157),
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  if (!showBookingDetails &&
-                      !showPlatformTicketDetails &&
-                      !showSeasonalBookingDetails &&
-                      !showBookingHistoryDetails)
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          showBookingDetails = true;
-                        });
-                      },
-                      child: Text(
-                        'Click to book',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.blue,
+                          SizedBox(height: 10),
+                          GestureDetector(
+                            onTap: () {
+                              // Handle more button click for booking history
+                              // You can add logic here to navigate to a new page displaying all tickets
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AllTicketsScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                // Customize the container's appearance as needed
+                                color: Color(
+                                    0xFFFFE400), // Example background color
+                                borderRadius: BorderRadius.circular(
+                                    8), // Example border radius
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Icon(
+                                  //   Icons.more_horiz,
+                                  //   color: Colors.white, // Example icon color
+                                  // ),
+                                  Text(
+                                    'View All',
+                                    style: TextStyle(
+                                      color: Colors.black, // Example text color
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    if (!showBookingDetails &&
+                        !showPlatformTicketDetails &&
+                        !showSeasonalBookingDetails &&
+                        !showBookingHistoryDetails)
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            showBookingDetails = true;
+                          });
+                        },
+                        child: Text(
+                          'Click to book',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.blue,
+                          ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
-            SizedBox(height: 20),
-            Divider(height: 1, color: Color.fromRGBO(203, 199, 199, 1)),
+
+            const Divider(height: 1, color: Color.fromRGBO(203, 199, 199, 1)),
 
             //Layer 3
             Container(
@@ -651,7 +882,7 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            SizedBox(height: 10),
+
             Divider(height: 1, color: Color.fromRGBO(203, 199, 199, 1)),
 
             // Layer 3
@@ -671,19 +902,19 @@ class _DashboardState extends State<Dashboard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        height: 100.0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            buildContainer(tCurrency, "Fares"),
-                            SizedBox(width: 10.0), // Adjust the width as needed
-                            buildContainer(tMaps, "Maps"),
-                            SizedBox(width: 10.0), // Adjust the width as needed
-                            buildContainer(tPenalty, "Penalties"),
-                          ],
-                        ),
-                      ),
+                      buildContainer(tCurrency, "Fares", () {
+                        print("Fares pressed");
+                      }),
+                      SizedBox(width: 10.0),
+                      buildContainer(tMaps, "Maps", () {
+                        Get.to(Maps());
+                        print("Maps pressed");
+                      }),
+                      SizedBox(width: 10.0),
+                      buildContainer(tPenalty, "Penalties", () {
+                        Get.to(Penalties());
+                        print("Penalties pressed");
+                      }),
                     ],
                   ),
                 ],
@@ -715,50 +946,70 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Widget buildCircularImage(String imageName, String imageType) {
+  Widget buildCircularImage(String imageName, String imageType, String label) {
+    bool isSelected = selectedImage == imageName;
+
     return GestureDetector(
       onTap: () {
-        setState(() {
-          selectedImage = imageName;
-          showBookingDetails = (imageType == 'Booking');
-          showPlatformTicketDetails = (imageType == 'Platform Ticket');
-          showSeasonalBookingDetails = (imageType == 'Seasonal Booking');
-          showBookingHistoryDetails = (imageType == 'Booking History');
-        });
+        if (!isSelected) {
+          setState(() {
+            selectedImage = imageName;
+            showBookingDetails = (imageType == 'Booking');
+            showPlatformTicketDetails = (imageType == 'Platform Ticket');
+            showSeasonalBookingDetails = (imageType == 'Seasonal Booking');
+            showBookingHistoryDetails = (imageType == 'Booking History');
+          });
+        }
       },
-      child: Container(
-        margin: EdgeInsets.all(8),
-        child: CircleAvatar(
-          radius: 50,
-          backgroundImage: AssetImage(imageName),
+      child: Opacity(
+        opacity: isSelected ? 1.0 : 0.5, // Adjust the opacity as needed
+        child: Container(
+          margin: EdgeInsets.all(8),
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage(imageName),
+              ),
+              SizedBox(height: 8), // Adjust the spacing between image and text
+              Text(
+                label,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-}
 
-Widget buildContainer(String assetImage, String label) {
-  return Container(
-    width: 100.0, // Set a fixed width
-    padding: EdgeInsets.all(10.0),
-    decoration: BoxDecoration(
-      color: Color.fromARGB(255, 245, 242, 242),
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    child: Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image(
-          image: AssetImage(assetImage),
-          height: 40.0,
-          width: 40.0,
+  Widget buildContainer(
+      String assetImage, String label, VoidCallback onPressed) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: 100.0, // Set a fixed width
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 245, 242, 242),
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        SizedBox(height: 8.0),
-        Text(label),
-      ],
-    ),
-  );
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+              image: AssetImage(assetImage),
+              height: 40.0,
+              width: 40.0,
+            ),
+            SizedBox(height: 8.0),
+            Text(label),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class AllTicketsScreen extends StatelessWidget {
@@ -770,20 +1021,6 @@ class AllTicketsScreen extends StatelessWidget {
       ),
       body: Center(
         child: Text('Display all tickets here'),
-      ),
-    );
-  }
-}
-
-class StudentScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Student Screen'),
-      ),
-      body: Center(
-        child: Text('Content of Student Screen'),
       ),
     );
   }

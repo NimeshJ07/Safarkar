@@ -14,6 +14,7 @@ const String tSeasonalBooking = "assets/images/welcome/reservation.png";
 const String tCurrency = "assets/images/welcome/currency.png";
 const String tMaps = "assets/images/welcome/map.png";
 const String tPenalty = "assets/images/welcome/punishment.png";
+const String tRailMap = "assets/images/welcome/RailMap.png";
 
 const String tGoogle = "assets/images/logo/google.png";
 const String tLogin = "assets/images/logo/rail.png";

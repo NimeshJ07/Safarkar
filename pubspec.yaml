@@ -30,6 +30,8 @@ dependencies:
   flutter_native_splash:
   line_awesome_flutter:
   bottom_navy_bar: ^6.0.0
+  photo_view: ^0.14.0
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
