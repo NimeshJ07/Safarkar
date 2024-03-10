@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safar_kar/src/features/authentication/screens/Payment/payment.dart';
+import 'package:safar_kar/src/features/authentication/screens/SeasonalTickets/SeasonalTicket.dart';
+import 'package:safar_kar/src/features/authentication/screens/TicketDisplay.dart';
 import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/penality.dart';
 import 'package:safar_kar/src/features/authentication/screens/onboard/onboardscreen.dart';
 import 'package:safar_kar/src/repo/user_repo/user_repo.dart';
@@ -30,14 +32,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: SafarTheme.lightTheme,
-      darkTheme: SafarTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      debugShowCheckedModeBanner: false,
-      defaultTransition: Transition.leftToRightWithFade,
-      transitionDuration: const Duration(milliseconds: 500),
-      home: OnBoardScreen(),
-    );
+        theme: SafarTheme.lightTheme,
+        darkTheme: SafarTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        debugShowCheckedModeBanner: false,
+        defaultTransition: Transition.leftToRightWithFade,
+        transitionDuration: const Duration(milliseconds: 500),
+        home: OnBoardScreen());
   }
 }
 

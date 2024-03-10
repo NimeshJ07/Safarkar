@@ -4,6 +4,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/features/authentication/screens/Payment/payment.dart';
+import 'package:safar_kar/src/features/authentication/screens/SeasonalTickets/SeasonalSummary.dart';
+import 'package:safar_kar/src/features/authentication/screens/SeasonalTickets/SeasonalTicket.dart';
 
 class StudentScreen extends StatefulWidget {
   const StudentScreen({Key? key}) : super(key: key);
@@ -50,19 +52,21 @@ class _StudentScreenState extends State<StudentScreen> {
   }
 
   void retrieveTicketNumber() {
-    final Map args = Get.arguments;
-    final String ticketNumber = args['ticketNumber'] ?? '';
-    if (ticketNumber.isNotEmpty) {
-      // If ticket number is present, remove radio selection
-      setState(() {
-        isStudent = null;
-        ticketNumberController.text = ticketNumber;
-      });
-    } else {
-      // If no ticket number, automatically select "Yes" radio button
-      setState(() {
-        isStudent = false;
-      });
+    final Map? args = Get.arguments;
+    if (args != null) {
+      final String? ticketNumber = args['ticketNumber'] as String?;
+      if (ticketNumber != null && ticketNumber.isNotEmpty) {
+        // If ticket number is present, remove radio selection
+        setState(() {
+          isStudent = null;
+          ticketNumberController.text = ticketNumber;
+        });
+      } else {
+        // If no ticket number, automatically select "Yes" radio button
+        setState(() {
+          isStudent = false;
+        });
+      }
     }
   }
 
@@ -376,7 +380,7 @@ class _StudentScreenState extends State<StudentScreen> {
           width: 200.0,
           child: TextButton(
             onPressed: () {
-              Get.to(Payment());
+              Get.to(SeasonalSummary());
             },
             style: TextButton.styleFrom(
               backgroundColor: tPrimaryColor,

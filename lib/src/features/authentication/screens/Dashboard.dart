@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/constants/image_string.dart';
+import 'package:safar_kar/src/features/authentication/screens/AllTicket.dart';
 import 'package:safar_kar/src/features/authentication/screens/Payment/payment.dart';
 import 'package:safar_kar/src/features/authentication/screens/StudentCon.dart';
+import 'package:safar_kar/src/features/authentication/screens/TicketDisplay.dart';
 import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/map.dart';
 import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/penality.dart';
-import 'Dashboard/layer2.dart';
+
 import 'package:safar_kar/src/features/authentication/screens/profile/profile.dart';
 
 void main() {
@@ -342,28 +344,29 @@ class _DashboardState extends State<Dashboard> {
                                     child: TextFormField(
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.train_outlined),
-                                        // labelText: "Source",
                                         hintText: "Enter your Source Station",
                                         border: OutlineInputBorder(),
                                         contentPadding: EdgeInsets.symmetric(
-                                            vertical:
-                                                12.0), // Adjust the vertical padding as needed
+                                            vertical: 12.0),
                                       ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
-                                  Container(
-                                    height: 50.0,
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.number,
-                                      decoration: const InputDecoration(
+                                  Visibility(
+                                    visible: platformTicketType == 'Multiple',
+                                    child: Container(
+                                      height: 50.0,
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
                                           prefixIcon:
                                               Icon(Icons.person_2_outlined),
-                                          // labelText: "Person",
                                           hintText: "Enter a Number of Person",
                                           border: OutlineInputBorder(),
                                           contentPadding: EdgeInsets.symmetric(
-                                              vertical: 12.0)),
+                                              vertical: 12.0),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -371,8 +374,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             SizedBox(height: 10.0),
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  20.0), // Adjust the radius as needed
+                              borderRadius: BorderRadius.circular(20.0),
                               child: SizedBox(
                                 width: 200.0,
                                 child: TextButton(
@@ -589,10 +591,12 @@ class _DashboardState extends State<Dashboard> {
                       Column(
                         children: [
                           Container(
-                            width: 320,
+                            width: 350,
                             height: 180,
                             decoration: BoxDecoration(
-                              color: Colors.grey[200],
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 4,
@@ -609,78 +613,91 @@ class _DashboardState extends State<Dashboard> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
-                                      color: Color(0xFFFFE400),
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10.0),
+                                          topRight: Radius.circular(10.0),
+                                        ),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 10),
                                       child: Row(
-                                        mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Flexible(
-                                            child: Text(
-                                              'Booked Ticket',
-                                              textAlign: TextAlign.justify,
-                                              style: TextStyle(
-                                                fontFamily: 'Readex Pro',
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Booked Ticket",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                          VerticalDivider(
-                                            thickness: 1,
-                                            color: Colors.grey[300],
-                                          ),
-                                          Text(
-                                            'Fare : \$20',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Fares : ",
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "20.00/-",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          'Source ',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 40,
-                                          child: VerticalDivider(
-                                            thickness: 1,
-                                            color: Colors.grey[300],
-                                          ),
-                                        ),
-                                        Text(
-                                          'Destination',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Expanded(
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 50.0, right: 50.0),
                                       child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 20.0)),
-                                          Text(
-                                            'Via : CLA',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal,
-                                            ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Source ',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'Destination',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -692,90 +709,129 @@ class _DashboardState extends State<Dashboard> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          'Adult : 1',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                          ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Adult : 1',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(
-                                          height: 40,
-                                          child: VerticalDivider(
-                                            thickness: 1,
-                                            color: Colors.grey[300],
-                                          ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'SECOND (||)',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          'SECOND (||)',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 40,
-                                          child: VerticalDivider(
-                                            thickness: 1,
-                                            color: Colors.grey[300],
-                                          ),
-                                        ),
-                                        Text(
-                                          'ORDINARY',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                          ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'ORDINARY',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          'Booking Date : 28/02/2024',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15.0, right: 15.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Booking Date : 28/02/2024',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 40,
-                                          child: VerticalDivider(
-                                            thickness: 1,
-                                            color: Colors.grey[300],
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'MTM : 202020222',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
                                           ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        left: 10.0,
+                                        right: 10.0,
+                                      ),
+                                      child: Divider(
+                                        height: BorderSide.strokeAlignCenter,
+                                        color: Colors.grey.shade300,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, right: 10.0),
+                                      child: InkWell(
+                                        onTap: () {
+                                          // Navigate to the new screen here
+                                          Get.to(Ticket());
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.arrow_forward_outlined),
+                                            SizedBox(width: 10.0),
+                                            Text(
+                                              "View Ticket",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          'MTM : 202020222',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
-                                Center(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color.fromARGB(255, 1, 222, 82)
-                                          .withOpacity(0.1),
-                                    ),
-                                    padding: EdgeInsets.all(50),
-                                    child: Transform.rotate(
-                                      angle: -20 * 3.141592653589793 / 180,
-                                      child: Text(
-                                        'BOOKED',
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 158, 158, 157),
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle: FontStyle.italic,
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top:
+                                          35.0), // Adjust the top value as needed
+                                  child: Center(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color.fromARGB(255, 1, 222, 82)
+                                            .withOpacity(0.1),
+                                      ),
+                                      padding: EdgeInsets.all(30),
+                                      child: Transform.rotate(
+                                        angle: -5 * 3.141592653589793 / 180,
+                                        child: Text(
+                                          'BOOKED',
+                                          style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 158, 158, 157),
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle: FontStyle.italic,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -789,12 +845,7 @@ class _DashboardState extends State<Dashboard> {
                             onTap: () {
                               // Handle more button click for booking history
                               // You can add logic here to navigate to a new page displaying all tickets
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AllTicketsScreen(),
-                                ),
-                              );
+                              Get.to(AllTickets());
                             },
                             child: Container(
                               padding: EdgeInsets.all(10),
@@ -1007,20 +1058,6 @@ class _DashboardState extends State<Dashboard> {
             Text(label),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AllTicketsScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('All Tickets'),
-      ),
-      body: Center(
-        child: Text('Display all tickets here'),
       ),
     );
   }

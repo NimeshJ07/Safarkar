@@ -7,9 +7,15 @@ import 'package:safar_kar/src/features/authentication/controllers/logincontrolle
 import 'package:safar_kar/src/features/authentication/screens/Dashboard.dart';
 import 'package:safar_kar/src/features/authentication/screens/forgotpass/forgotpassmail.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
 
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
@@ -36,14 +42,21 @@ class LoginForm extends StatelessWidget {
             ),
             TextFormField(
               controller: controller.pass,
+              obscureText: _obscureText,
               decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.fingerprint),
                   labelText: "Password",
                   hintText: "Enter your Password",
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.remove_red_eye_sharp))),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                      icon: Icon(_obscureText
+                          ? Icons.visibility
+                          : Icons.visibility_off))),
             ),
             const SizedBox(
               height: 5.0,

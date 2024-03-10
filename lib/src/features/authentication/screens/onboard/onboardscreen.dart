@@ -5,6 +5,7 @@ import 'package:safar_kar/src/constants/colors.dart';
 import 'package:safar_kar/src/features/authentication/controllers/onboardcontroller.dart';
 import 'package:safar_kar/src/features/authentication/screens/splashscreen/splashscreen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:get/get.dart';
 
 class OnBoardScreen extends StatelessWidget {
   const OnBoardScreen({Key? key}) : super(key: key);
@@ -45,14 +46,11 @@ class OnBoardScreen extends StatelessWidget {
             right: 20,
             child: TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SplashScreen()),
-                );
+                Get.to(SplashScreen());
               },
               child: const Text(
                 "Skip",
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: Colors.black),
               ),
             ),
           ),

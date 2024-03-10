@@ -6,9 +6,15 @@ import 'package:safar_kar/src/features/authentication/models/user_model.dart';
 import 'package:safar_kar/src/features/authentication/screens/Login/login.dart';
 import 'package:safar_kar/src/features/authentication/screens/forgotpass/forgotpassotp.dart';
 
-class SignUpForm extends StatelessWidget {
+class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
 
+  @override
+  State<SignUpForm> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpForm> {
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
@@ -101,14 +107,20 @@ class SignUpForm extends StatelessWidget {
             ),
             TextFormField(
               controller: controller.pass,
+              obscureText: _obscureText,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.fingerprint),
                 labelText: "Password",
                 hintText: "Enter your Password",
                 border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.remove_red_eye_sharp),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off),
                 ),
               ),
             ),

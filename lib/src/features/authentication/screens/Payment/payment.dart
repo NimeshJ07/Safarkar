@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safar_kar/src/constants/image_string.dart';
+import 'package:safar_kar/src/features/authentication/screens/TicketDisplay.dart';
 import 'package:safar_kar/src/features/authentication/screens/profile/profile.dart';
 
 class Payment extends StatefulWidget {
@@ -494,7 +495,7 @@ class _PaymentState extends State<Payment> {
                 padding: EdgeInsets.all(10),
                 child: ElevatedButton(
                   onPressed: () {
-                    print('Button pressed ...');
+                    Get.to(Ticket());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.yellow,
