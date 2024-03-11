@@ -15,9 +15,12 @@ const String tCurrency = "assets/images/welcome/currency.png";
 const String tMaps = "assets/images/welcome/map.png";
 const String tPenalty = "assets/images/welcome/punishment.png";
 const String tRailMap = "assets/images/welcome/RailMap.png";
+const String tFares = "assets/images/welcome/fareChart-1.png";
 
 const String tGoogle = "assets/images/logo/google.png";
 const String tLogin = "assets/images/logo/rail.png";
 const String tFp = "assets/images/logo/forgot-password.png";
 const String tOtp = "assets/images/logo/otp.png";
 const String tProfile = "assets/images/logo/user.png";
+
+const String FaresPdf = "assets/PDF/fares.pdf";

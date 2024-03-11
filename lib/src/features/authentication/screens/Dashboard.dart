@@ -6,6 +6,7 @@ import 'package:safar_kar/src/features/authentication/screens/AllTicket.dart';
 import 'package:safar_kar/src/features/authentication/screens/Payment/payment.dart';
 import 'package:safar_kar/src/features/authentication/screens/StudentCon.dart';
 import 'package:safar_kar/src/features/authentication/screens/TicketDisplay.dart';
+import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/fares.dart';
 import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/map.dart';
 import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/penality.dart';
 
@@ -954,6 +955,7 @@ class _DashboardState extends State<Dashboard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       buildContainer(tCurrency, "Fares", () {
+                        Get.to(Fares());
                         print("Fares pressed");
                       }),
                       SizedBox(width: 10.0),
