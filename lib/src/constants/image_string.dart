@@ -23,4 +23,7 @@ const String tFp = "assets/images/logo/forgot-password.png";
 const String tOtp = "assets/images/logo/otp.png";
 const String tProfile = "assets/images/logo/user.png";
 
+const String tWatermark1 = "assets/images/welcome/Booked.png";
+const String tWatermark2 = "assets/images/welcome/BookedWater.png.jpg";
+
 const String FaresPdf = "assets/PDF/fares.pdf";

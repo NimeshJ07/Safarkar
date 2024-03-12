@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safar_kar/src/constants/colors.dart';
+import 'package:safar_kar/src/constants/image_string.dart';
 import 'package:safar_kar/src/features/authentication/screens/Payment/payment.dart';
 import 'package:safar_kar/src/features/authentication/screens/welcome/welcome.dart';
 
@@ -63,14 +64,31 @@ class Ticket extends StatelessWidget {
                     left: 10.0, right: 10.0, bottom: 10.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20.0),
+                    image: DecorationImage(
+                      image: AssetImage(
+                          tWatermark1), // Setting the background image
+                      fit: BoxFit.cover,
+                      alignment: Alignment
+                          .center, // Centering the image within the container
+                      colorFilter: ColorFilter.mode(
+                        Colors.white.withOpacity(
+                            1), // Applying opacity (adjust the value as needed)
+                        BlendMode.dstATop,
+                      ),
+                    ),
+
+                    borderRadius: BorderRadius.circular(
+                        20.0), // Adding a border radius of 20.0
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
+                        color: const Color.fromARGB(255, 252, 248, 248)
+                            .withOpacity(
+                                0.5), // Adding a gray box shadow with 50% opacity
+                        spreadRadius: 2, // Spreading the shadow by 2 units
+                        blurRadius:
+                            5, // Applying a blur effect with a radius of 5 units
+                        offset: const Offset(
+                            0, 3), // Setting the shadow offset to (0, 3)
                       ),
                     ],
                   ),

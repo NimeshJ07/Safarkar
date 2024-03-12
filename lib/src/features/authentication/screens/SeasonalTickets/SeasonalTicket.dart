@@ -64,7 +64,18 @@ class SeasonalTicket extends StatelessWidget {
                     left: 10.0, right: 10.0, bottom: 10.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    image: DecorationImage(
+                      image: AssetImage(
+                          tWatermark1), // Setting the background image
+                      fit: BoxFit.cover,
+                      alignment: Alignment
+                          .center, // Centering the image within the container
+                      colorFilter: ColorFilter.mode(
+                        Colors.white.withOpacity(
+                            1), // Applying opacity (adjust the value as needed)
+                        BlendMode.dstATop,
+                      ),
+                    ),
                     borderRadius: BorderRadius.circular(20.0),
                     boxShadow: [
                       BoxShadow(
