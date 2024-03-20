@@ -5,6 +5,7 @@ import 'package:safar_kar/src/constants/image_string.dart';
 import 'package:safar_kar/src/constants/text.dart';
 import 'package:safar_kar/src/features/authentication/controllers/logincontroller.dart';
 import 'package:safar_kar/src/features/authentication/screens/Login/LoginForm.dart';
+import 'package:safar_kar/src/features/authentication/screens/Login/TC.dart';
 import 'package:safar_kar/src/features/authentication/screens/SignUp/signup.dart';
 
 class Login extends StatelessWidget {
@@ -43,6 +44,22 @@ class Login extends StatelessWidget {
                 Text(tLoginSubTitle,
                     style: Theme.of(context).textTheme.labelLarge),
                 const LoginForm(),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.to(const TC());
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: tPrimaryColor,
+                      foregroundColor: tDarkColor,
+                    ),
+                    child: const Text("TICKET CHECKER"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
