@@ -1,15 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:safar_kar/src/features/authentication/screens/Payment/payment.dart';
-import 'package:safar_kar/src/features/authentication/screens/SeasonalTickets/SeasonalTicket.dart';
-import 'package:safar_kar/src/features/authentication/screens/TicketDisplay.dart';
-import 'package:safar_kar/src/features/authentication/screens/UsefulForYou/penality.dart';
 import 'package:safar_kar/src/features/authentication/screens/onboard/onboardscreen.dart';
+import 'package:safar_kar/src/features/authentication/screens/AllTicket.dart';
 import 'package:safar_kar/src/repo/user_repo/user_repo.dart';
 import 'firebase_options.dart';
-import 'src/features/authentication/screens/splashscreen/splashscreen.dart';
-import 'src/features/authentication/screens/Dashboard.dart';
 import 'src/repo/auth_repo/auth_repos.dart';
 import 'src/utils/theme/theme.dart';
 
@@ -38,7 +33,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
-        home: OnBoardScreen());
+        home: const AllTickets());
   }
 }
 
